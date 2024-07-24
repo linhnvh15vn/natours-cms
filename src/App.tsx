@@ -1,9 +1,7 @@
 import React from 'react';
+import { RouterProvider } from 'react-router-dom';
+import router from '@/router';
 
-interface Props {
-  // Add your component props here
-}
-
-export default function App(props: Props) {
-  return <div>{/* Add your component content here */}</div>;
+export default function App() {
+  return <RouterProvider router={router} />;
 }
