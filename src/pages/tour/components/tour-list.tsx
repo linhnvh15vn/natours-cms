@@ -130,7 +130,7 @@ export default function TourList() {
           layout="vertical"
           onFinish={onFinish}
           initialValues={{
-            name: undefined,
+            name: '',
             difficulty: undefined,
           }}
         >
