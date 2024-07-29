@@ -2,6 +2,9 @@ import { createBrowserRouter } from 'react-router-dom';
 import MainLayout from '@/components/main-layout';
 
 import SignIn from '@/pages/auth/components/sign-in';
+import Tour from '@/pages/tour';
+import TourList from '@/pages/tour/components/tour-list';
+import TourForm from '@/pages/tour/components/tour-form';
 
 const router = createBrowserRouter([
   {
@@ -10,19 +13,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/tours',
-        element: <div>TOURS</div>,
+        element: <Tour />,
         children: [
           {
             index: true,
-            element: <div>TOURS LIST</div>,
+            element: <TourList />,
           },
           {
             path: '/tours/create',
-            element: <div>TOUR FORM</div>,
+            element: <TourForm />,
           },
           {
             path: '/tours/edit/:_id',
-            element: <div>TOUR FORM</div>,
+            element: <TourForm />,
           },
         ],
       },

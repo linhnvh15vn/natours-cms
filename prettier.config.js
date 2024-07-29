@@ -1,15 +1,15 @@
-/** @type {import('prettier').Config & import('prettier-plugin-tailwindcss').PluginOptions} */
+/** @type {import('prettier').Config} */
 const config = {
   printWidth: 80,
   tabWidth: 2,
   useTabs: false,
-  endOfLine: "auto",
+  endOfLine: 'auto',
   singleQuote: true,
   jsxSingleQuote: false,
-  trailingComma: "all",
+  trailingComma: 'all',
   semi: true,
-  arrowParens: "always",
-  quoteProps: "as-needed",
+  arrowParens: 'always',
+  quoteProps: 'as-needed',
   bracketSpacing: true,
   bracketSameLine: false,
 };
