@@ -1,15 +1,22 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import MainLayout from '@/components/main-layout';
 
 import SignIn from '@/pages/auth/components/sign-in';
 import Tour from '@/pages/tour';
 import TourList from '@/pages/tour/components/tour-list';
 import TourForm from '@/pages/tour/components/tour-form';
+import User from '@/pages/user';
+import UserList from '@/pages/user/components/user-list';
+import UserForm from '@/pages/user/components/user-form';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <MainLayout />,
+    element: localStorage.getItem('token') ? (
+      <MainLayout />
+    ) : (
+      <Navigate to="/auth" />
+    ),
     children: [
       {
         path: '/tours',
@@ -31,15 +38,15 @@ const router = createBrowserRouter([
       },
       {
         path: '/users',
-        element: <div>USERS</div>,
+        element: <User />,
         children: [
           {
             index: true,
-            element: <div>USER LIST</div>,
+            element: <UserList />,
           },
           {
             path: '/users/:_id',
-            element: <div>USER FORM</div>,
+            element: <UserForm />,
           },
         ],
       },
@@ -50,7 +57,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <SignIn />,
+        element: localStorage.getItem('token') ? <MainLayout /> : <SignIn />,
       },
     ],
   },
