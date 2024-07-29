@@ -6,7 +6,7 @@ export const useSignIn = () => {
   return useMutation({
     mutationFn: authApi.signIn,
     onSuccess: (data) => {
-      localStorage.setItem('accessToken', data.token);
+      localStorage.setItem('token', data.token);
     },
   });
 };
