@@ -18,7 +18,11 @@ import {
   Divider,
 } from 'antd';
 import { ColumnsType } from 'antd/es/table';
-import { User, UserSearchParams } from '@/pages/user/types/user.types';
+import {
+  SearchUserFormValues,
+  User,
+  UserSearchParams,
+} from '@/pages/user/types/user.types';
 import { toCapitalize } from '@/utils';
 
 import { USER_ROLE, USER_ROLE_COLOR } from '@/constants';
@@ -32,12 +36,19 @@ export default function UserList() {
   const [visible, setVisible] = useState(false);
   const [searchParams, setSearchParams] = useState<UserSearchParams>({
     page: 1,
-    // name: '',
-    // email: '',
+    name: '',
+    email: '',
     role: undefined,
   });
 
   const { data, isLoading } = useGetUsers(searchParams);
+
+  const onFinish = (values: SearchUserFormValues) => {
+    setSearchParams((prev) => ({
+      ...prev,
+      ...values,
+    }));
+  };
 
   const columns: ColumnsType<User> = [
     {
@@ -102,7 +113,7 @@ export default function UserList() {
           name="search-user-form"
           form={form}
           layout="vertical"
-          initialValues={{}}
+          onFinish={onFinish}
         >
           <Row gutter={24}>
             <Col span={8}>
@@ -125,14 +136,15 @@ export default function UserList() {
                 <Space size="small">
                   <Button
                     htmlType="button"
-                    // onClick={() => {
-                    //   form.resetFields();
-                    //   setSearchParams({
-                    //     ...searchParams,
-                    //     name: undefined,
-                    //     difficulty: undefined,
-                    //   });
-                    // }}
+                    onClick={() => {
+                      form.resetFields();
+                      setSearchParams({
+                        ...searchParams,
+                        name: '',
+                        email: '',
+                        role: undefined,
+                      });
+                    }}
                   >
                     Reset
                   </Button>

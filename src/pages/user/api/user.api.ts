@@ -1,6 +1,5 @@
 import axiosInstance from '@/api/axios';
-import { User } from '@/pages/auth/types/auth.types';
-import { UserSearchParams } from '@/pages/user/types/user.types';
+import { User, UserSearchParams } from '@/pages/user/types/user.types';
 import { HttpResponse, PaginatedData } from '@/types';
 
 export const userApi = {
