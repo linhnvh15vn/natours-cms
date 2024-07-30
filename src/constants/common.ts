@@ -1,10 +1,5 @@
 export const EXAMPLE = 'EXAMPLE';
 
-export enum QUERY_KEY {
-  TOURS = 'tours',
-  USERS = 'users',
-}
-
 export const TOUR_DIFFICULTY_OPTIONS = [
   { label: 'Easy', value: 'easy' },
   { label: 'Medium', value: 'medium' },
@@ -16,6 +11,13 @@ export const DIFFICULT_COLOR: { [key: string]: string } = {
   medium: 'blue',
   difficult: 'red',
 };
+
+export const USER_ROLE = [
+  { label: 'User', value: 'user' },
+  { label: 'Guide', value: 'guide' },
+  { label: 'Lead Guide', value: 'lead-guide' },
+  { label: 'Admin', value: 'admin' },
+];
 
 export const USER_ROLE_COLOR: { [key: string]: string } = {
   user: 'cyan',
