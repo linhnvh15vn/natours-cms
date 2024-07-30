@@ -16,7 +16,6 @@ import {
   Modal,
   Row,
   Select,
-  SelectProps,
   Space,
   Typography,
   Upload,
@@ -30,6 +29,7 @@ import axiosInstance from '@/api/axios';
 import { DATE_FORMAT, TOUR_DIFFICULTY_OPTIONS } from '@/constants';
 import dayjs from 'dayjs';
 import { toast } from 'sonner';
+import { useGetUsers } from '@/pages/user/hooks/user.hooks';
 
 export default function TourForm() {
   const [form] = Form.useForm();
@@ -41,6 +41,7 @@ export default function TourForm() {
   // const [previewTitle, setPreviewTitle] = useState('');
   const [openDrawer, setOpenDrawer] = useState(false);
 
+  const { data: userData } = useGetUsers({ all: true });
   const { data, isLoading } = useGetTourById(_id || '', { enabled: !!_id });
 
   const [imageCover, setImageCover] = useState<UploadFile[]>(
@@ -56,21 +57,6 @@ export default function TourForm() {
       : [],
   );
   const [imageList, setImageList] = useState<UploadFile[]>([]);
-
-  const options: SelectProps['options'] = [
-    {
-      label: 'User 1',
-      value: '1',
-    },
-    {
-      label: 'User 2',
-      value: '2',
-    },
-    {
-      label: 'User 3',
-      value: '3',
-    },
-  ];
 
   // Remove this code to utils folder
   const getStarScore = (rate: number) => {
@@ -119,6 +105,8 @@ export default function TourForm() {
   if (isLoading) {
     return <h1>Loading...</h1>;
   }
+
+  console.log(userData);
 
   return (
     <Card
@@ -265,7 +253,7 @@ export default function TourForm() {
           </Col>
           <Col span={12}>
             <Form.Item name="guides" label="Guides">
-              <Select mode="multiple" className="w-full" options={options} />
+              <Select mode="multiple" className="w-full" options={userData} />
             </Form.Item>
           </Col>
           <Col span={12}>
