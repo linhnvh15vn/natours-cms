@@ -19,17 +19,18 @@ import {
   Space,
   Typography,
   Upload,
-  UploadFile,
-  UploadProps,
+  type UploadFile,
+  type UploadProps,
 } from 'antd';
+import dayjs from 'dayjs';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useCreateTour, useGetTourById } from '@/pages/tour/hooks/tour.hooks';
-import { getNameImageFromUrl } from '@/utils';
+import { toast } from 'sonner';
+
 import axiosInstance from '@/api/axios';
 import { DATE_FORMAT, TOUR_DIFFICULTY_OPTIONS } from '@/constants';
-import dayjs from 'dayjs';
-import { toast } from 'sonner';
+import { useCreateTour, useGetTourById } from '@/pages/tour/hooks/tour.hooks';
 import { useGetUsers } from '@/pages/user/hooks/user.hooks';
+import { getNameImageFromUrl, getStarScore } from '@/utils';
 
 export default function TourForm() {
   const [form] = Form.useForm();
@@ -42,7 +43,7 @@ export default function TourForm() {
   const [openDrawer, setOpenDrawer] = useState(false);
 
   const { data: userData } = useGetUsers({ all: true });
-  const { data, isLoading } = useGetTourById(_id || '', { enabled: !!_id });
+  const { data, isLoading } = useGetTourById(_id ?? '', { enabled: !!_id });
 
   const [imageCover, setImageCover] = useState<UploadFile[]>(
     _id
@@ -58,18 +59,13 @@ export default function TourForm() {
   );
   const [imageList, setImageList] = useState<UploadFile[]>([]);
 
-  // Remove this code to utils folder
-  const getStarScore = (rate: number) => {
-    return '★★★★★☆☆☆☆☆'.slice(5 - rate, 10 - rate);
-  };
-
-  const uploadProps: UploadProps = {
+  const uploadProps: UploadProps<{ image: string; url: string }> = {
     action: 'http://127.0.0.1:8080/api/v1/upload',
     name: 'file',
     fileList: imageCover,
     listType: 'picture-card',
     onPreview: (file) => {
-      setPreviewImage(file.response?.image || file.url);
+      setPreviewImage(file.response?.image ?? file.url!);
       setPreviewOpen(true);
     },
     onChange: ({ file, fileList }) => {
@@ -78,7 +74,7 @@ export default function TourForm() {
         setImageCover(fileList);
       }
       if (file.status === 'done') {
-        form.setFieldValue('imageCover', file.response.image);
+        form.setFieldValue('imageCover', file.response?.image);
         setImageCover(fileList);
       }
       if (file.status === 'removed') {

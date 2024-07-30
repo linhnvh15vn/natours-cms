@@ -1,9 +1,9 @@
 import React from 'react';
 
 interface Props {
-  // Add your component props here
+  prop: string;
 }
 
-export default function Example(props: Props) {
+export default function Example({ prop }: Props) {
   return <div>{/* Add your component content here */}</div>;
 }

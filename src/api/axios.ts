@@ -1,14 +1,14 @@
-import axios from 'axios';
+import axios, { type AxiosResponse } from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: import.meta.env.VITE_API_URL as string,
   timeout: 5000,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-axiosInstance.interceptors.request.use(async (config) => {
+axiosInstance.interceptors.request.use(async (config: any) => {
   return {
     ...config,
     headers: {
@@ -19,8 +19,8 @@ axiosInstance.interceptors.request.use(async (config) => {
 });
 
 axiosInstance.interceptors.response.use(
-  (response) => {
-    if (response && response.data) {
+  (response: AxiosResponse) => {
+    if (response?.data) {
       return response.data;
     }
 

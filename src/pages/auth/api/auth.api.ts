@@ -1,6 +1,6 @@
 import axiosInstance from '@/api/axios';
-import { AuthData, SignInBody } from '@/pages/auth/types/auth.types';
-import { HttpResponse } from '@/types';
+import { type AuthData, type SignInBody } from '@/pages/auth/types/auth.types';
+import { type HttpResponse } from '@/types';
 
 export const authApi = {
   signIn: async (body: SignInBody) => {

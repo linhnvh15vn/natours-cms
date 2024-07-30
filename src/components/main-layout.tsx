@@ -1,9 +1,10 @@
 import React from 'react';
 
-import Header from '@/components/header';
-import Navigation from '@/components/navigation';
 import { Breadcrumb, Layout } from 'antd';
 import { Outlet, useMatches } from 'react-router-dom';
+
+import Header from '@/components/header';
+import Navigation from '@/components/navigation';
 
 export default function MainLayout() {
   const matches = useMatches();

@@ -1,8 +1,9 @@
 import React from 'react';
 
 import { Form, Row, Col, Image, Input, Select, Switch } from 'antd';
+
 import { USER_ROLE } from '@/constants';
-import { User } from '@/pages/user/types/user.types';
+import { type User } from '@/pages/user/types/user.types';
 
 interface Props {
   selectedUser?: User;

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import { DeleteTwoTone, EditTwoTone } from '@ant-design/icons';
 import {
   Flex,
   Card,
@@ -17,18 +18,18 @@ import {
   Switch,
   Divider,
 } from 'antd';
-import { ColumnsType } from 'antd/es/table';
+import { type ColumnsType } from 'antd/es/table';
+
+import { USER_ROLE, USER_ROLE_COLOR } from '@/constants';
+import UserForm from '@/pages/user/components/user-form';
+import { useGetUsers } from '@/pages/user/hooks/user.hooks';
 import {
-  SearchUserFormValues,
-  User,
-  UserSearchParams,
+  type SearchUserFormValues,
+  type User,
+  type UserSearchParams,
 } from '@/pages/user/types/user.types';
 import { toCapitalize } from '@/utils';
 
-import { USER_ROLE, USER_ROLE_COLOR } from '@/constants';
-import { useGetUsers } from '@/pages/user/hooks/user.hooks';
-import { DeleteTwoTone, EditTwoTone } from '@ant-design/icons';
-import UserForm from '@/pages/user/components/user-form';
 
 export default function UserList() {
   const [form] = Form.useForm();

@@ -2,10 +2,10 @@ import { useQuery, useMutation } from '@tanstack/react-query';
 
 import { tourApi } from '@/pages/tour/api/tour.api';
 import {
-  TourSearchParams,
-  UseGetTourDetailsQueryOptions,
-  UseGetToursQueryOption,
-  UseTourMutationOptions,
+  type TourSearchParams,
+  type UseGetTourDetailsQueryOptions,
+  type UseGetToursQueryOption,
+  type UseTourMutationOptions,
 } from '@/pages/tour/types/tour.types';
 
 export const useGetTours = (

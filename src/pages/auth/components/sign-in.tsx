@@ -4,7 +4,7 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Card, Checkbox, Form, Input } from 'antd';
 
 import { useSignIn } from '@/pages/auth/hooks/auth.hooks';
-import { SignInBody } from '@/pages/auth/types/auth.types';
+import { type SignInBody } from '@/pages/auth/types/auth.types';
 
 export default function SignIn() {
   const { mutate } = useSignIn();

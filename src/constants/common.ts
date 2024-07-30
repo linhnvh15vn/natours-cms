@@ -6,7 +6,7 @@ export const TOUR_DIFFICULTY_OPTIONS = [
   { label: 'Difficult', value: 'difficult' },
 ];
 
-export const DIFFICULT_COLOR: { [key: string]: string } = {
+export const DIFFICULT_COLOR: Record<string, string> = {
   easy: 'green',
   medium: 'blue',
   difficult: 'red',
@@ -19,7 +19,7 @@ export const USER_ROLE = [
   { label: 'Admin', value: 'admin' },
 ];
 
-export const USER_ROLE_COLOR: { [key: string]: string } = {
+export const USER_ROLE_COLOR: Record<string, string> = {
   user: 'cyan',
   guide: 'gold',
   'lead-guide': 'volcano',

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-import { DIFFICULT_COLOR, TOUR_DIFFICULTY_OPTIONS } from '@/constants';
+import { DeleteTwoTone, EditOutlined } from '@ant-design/icons';
+import { useQueryClient } from '@tanstack/react-query';
 import {
   Flex,
   Card,
@@ -17,17 +18,17 @@ import {
   Divider,
   Popconfirm,
 } from 'antd';
-import {
-  SearchTourFormValues,
-  Tour,
-  TourSearchParams,
-} from '@/pages/tour/types/tour.types';
+import { type ColumnsType } from 'antd/es/table';
 import { Link, useNavigate } from 'react-router-dom';
-import { useQueryClient } from '@tanstack/react-query';
-import { useDeleteTour, useGetTours } from '@/pages/tour/hooks/tour.hooks';
 import { toast } from 'sonner';
-import { ColumnsType } from 'antd/es/table';
-import { DeleteTwoTone, EditOutlined } from '@ant-design/icons';
+
+import { DIFFICULT_COLOR, TOUR_DIFFICULTY_OPTIONS } from '@/constants';
+import { useDeleteTour, useGetTours } from '@/pages/tour/hooks/tour.hooks';
+import {
+  type SearchTourFormValues,
+  type Tour,
+  type TourSearchParams,
+} from '@/pages/tour/types/tour.types';
 import { toCapitalize } from '@/utils';
 
 export default function TourList() {
@@ -46,7 +47,7 @@ export default function TourList() {
   const { mutate: mutateDeleteTour } = useDeleteTour({
     onSuccess: () => {
       toast.success('Delete success!');
-      queryClient.invalidateQueries({ queryKey: ['tours'] });
+      void queryClient.invalidateQueries({ queryKey: ['tours'] });
     },
     onError: () => {
       toast.error('Delete failed!');

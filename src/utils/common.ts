@@ -6,3 +6,7 @@ export const getNameImageFromUrl = (url: string) => {
   const fileName = url.split('/').slice(-1)[0];
   return fileName;
 };
+
+export const getStarScore = (rate: number) => {
+  return '★★★★★☆☆☆☆☆'.slice(5 - rate, 10 - rate);
+};

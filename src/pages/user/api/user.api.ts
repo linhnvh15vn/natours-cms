@@ -1,6 +1,6 @@
 import axiosInstance from '@/api/axios';
-import { User, UserSearchParams } from '@/pages/user/types/user.types';
-import { HttpResponse, PaginatedData } from '@/types';
+import { type User, type UserSearchParams } from '@/pages/user/types/user.types';
+import { type HttpResponse, type PaginatedData } from '@/types';
 
 export const userApi = {
   getAllUsers: async (params?: UserSearchParams) => {

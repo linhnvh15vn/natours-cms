@@ -1,11 +1,11 @@
 import axiosInstance from '@/api/axios';
 import {
-  CreateTourBody,
-  Tour,
-  TourSearchParams,
-  UpdateTourBody,
+  type CreateTourBody,
+  type Tour,
+  type TourSearchParams,
+  type UpdateTourBody,
 } from '@/pages/tour/types/tour.types';
-import { HttpResponse, PaginatedData } from '@/types';
+import { type HttpResponse, type PaginatedData } from '@/types';
 
 export const tourApi = {
   getAllTours: async (params?: TourSearchParams) => {

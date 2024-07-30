@@ -1,13 +1,13 @@
 import { createBrowserRouter, Navigate, Link } from 'react-router-dom';
-import MainLayout from '@/components/main-layout';
 
+import MainLayout from '@/components/main-layout';
 import SignIn from '@/pages/auth/components/sign-in';
 import Tour from '@/pages/tour';
-import TourList from '@/pages/tour/components/tour-list';
 import TourForm from '@/pages/tour/components/tour-form';
+import TourList from '@/pages/tour/components/tour-list';
 import User from '@/pages/user';
-import UserList from '@/pages/user/components/user-list';
 import UserForm from '@/pages/user/components/user-form';
+import UserList from '@/pages/user/components/user-list';
 
 const router = createBrowserRouter([
   {

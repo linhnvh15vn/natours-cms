@@ -1,13 +1,16 @@
-import { UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
+import {
+  type UseMutationOptions,
+  type UseQueryOptions,
+} from '@tanstack/react-query';
 
-// import { User } from '@/pages/user/types';
-import { PaginatedData } from '@/types';
+import { type User } from '@/pages/user/types/user.types';
+import { type PaginatedData } from '@/types';
 
 export type Review = {
   _id: string;
   review: string;
   rating: number;
-  user: any;
+  user: User;
   createdAt: Date;
 };
 

@@ -1,4 +1,4 @@
-import { User } from '@/pages/user/types/user.types';
+import { type User } from '@/pages/user/types/user.types';
 
 export type AuthData = {
   token: string;

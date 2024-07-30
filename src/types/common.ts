@@ -1,4 +1,6 @@
-export type Example = {};
+export type Example = {
+  field: string;
+};
 
 export type HttpResponse<T> = {
   status: 'success' | 'fail' | 'error';
