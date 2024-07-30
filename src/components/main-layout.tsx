@@ -2,16 +2,24 @@ import React from 'react';
 
 import Header from '@/components/header';
 import Navigation from '@/components/navigation';
-import { Layout } from 'antd';
-import { Outlet } from 'react-router-dom';
+import { Breadcrumb, Layout } from 'antd';
+import { Outlet, useMatches } from 'react-router-dom';
 
 export default function MainLayout() {
+  const matches = useMatches();
+
+  const crumbs = matches
+    .filter((match) => Boolean(match.handle?.crumb))
+    .map((match) => match.handle.crumb(match.data));
+
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Navigation />
       <Layout>
         <Header />
         <Layout.Content style={{ margin: '0 16px' }}>
+          <Breadcrumb style={{ margin: '16px 0' }} items={[...crumbs]} />
+
           <div
             style={{
               padding: 24,

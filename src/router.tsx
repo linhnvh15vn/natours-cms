@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { createBrowserRouter, Navigate, Link } from 'react-router-dom';
 import MainLayout from '@/components/main-layout';
 
 import SignIn from '@/pages/auth/components/sign-in';
@@ -17,10 +17,20 @@ const router = createBrowserRouter([
     ) : (
       <Navigate to="/auth" />
     ),
+    handle: {
+      crumb: () => ({
+        title: <Link to="/">Home</Link>,
+      }),
+    },
     children: [
       {
         path: '/tours',
         element: <Tour />,
+        handle: {
+          crumb: () => ({
+            title: <Link to="/tours">Tours</Link>,
+          }),
+        },
         children: [
           {
             index: true,
@@ -29,16 +39,31 @@ const router = createBrowserRouter([
           {
             path: '/tours/create',
             element: <TourForm />,
+            handle: {
+              crumb: () => ({
+                title: 'Create',
+              }),
+            },
           },
           {
             path: '/tours/edit/:_id',
             element: <TourForm />,
+            handle: {
+              crumb: () => ({
+                title: 'Edit',
+              }),
+            },
           },
         ],
       },
       {
         path: '/users',
         element: <User />,
+        handle: {
+          crumb: () => ({
+            title: <Link to="/users">Users</Link>,
+          }),
+        },
         children: [
           {
             index: true,
