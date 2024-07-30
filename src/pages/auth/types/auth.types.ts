@@ -1,10 +1,4 @@
-export type User = {
-  _id: string;
-  name: string;
-  email: string;
-  photo: string;
-  active: boolean;
-};
+import { User } from '@/pages/user/types/user.types';
 
 export type AuthData = {
   token: string;
