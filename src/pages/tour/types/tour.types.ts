@@ -39,7 +39,7 @@ export type Tour = {
   /* eslint-disable-next-line */
   startLocation: any;
   locations: [];
-  guides: string[];
+  guides: User[];
   reviews?: Review[];
 };
 

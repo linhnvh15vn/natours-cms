@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { PlusOutlined } from '@ant-design/icons';
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import {
   Avatar,
   Button,
@@ -37,27 +37,61 @@ export default function TourForm() {
   const { _id } = useParams();
   const navigate = useNavigate();
 
+  const [imageCover, setImageCover] = useState<UploadFile[]>();
+  const [imageList, setImageList] = useState<UploadFile[]>();
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
-  // const [previewTitle, setPreviewTitle] = useState('');
+  const [previewTitle, setPreviewTitle] = useState('');
   const [openDrawer, setOpenDrawer] = useState(false);
 
-  const { data: userData } = useGetUsers({ all: true });
-  const { data, isLoading } = useGetTourById(_id ?? '', { enabled: !!_id });
+  const { data: userData } = useGetUsers({
+    all: true,
+  });
+  const { data, isLoading } = useGetTourById(_id ?? '', {
+    enabled: !!_id,
+  });
 
-  const [imageCover, setImageCover] = useState<UploadFile[]>(
-    _id
-      ? [
-          {
-            uid: '-1',
-            name: 'image',
-            status: 'done',
-            url: data?.imageCover,
-          },
-        ]
-      : [],
-  );
-  const [imageList, setImageList] = useState<UploadFile[]>([]);
+  useEffect(() => {
+    setImageCover(
+      _id
+        ? [
+            {
+              uid: '-1',
+              name: 'imageCover',
+              status: 'done',
+              url: data?.imageCover,
+            },
+          ]
+        : [],
+    );
+  }, [data?.imageCover, _id]);
+
+  useEffect(() => {
+    setImageList(
+      _id
+        ? [
+            {
+              uid: '-2',
+              name: 'images',
+              status: 'done',
+              url: data?.images[0],
+            },
+            {
+              uid: '-3',
+              name: 'images',
+              status: 'done',
+              url: data?.images[1],
+            },
+            {
+              uid: '-4',
+              name: 'images',
+              status: 'done',
+              url: data?.images[2],
+            },
+          ]
+        : [],
+    );
+  }, [data?.images, _id]);
 
   const uploadProps: UploadProps<{ image: string; url: string }> = {
     action: 'http://127.0.0.1:8080/api/v1/upload',
@@ -67,6 +101,7 @@ export default function TourForm() {
     onPreview: (file) => {
       setPreviewImage(file.response?.image ?? file.url!);
       setPreviewOpen(true);
+      setPreviewTitle('Preview tour images');
     },
     onChange: ({ file, fileList }) => {
       if (file.status === 'uploading') {
@@ -99,10 +134,8 @@ export default function TourForm() {
   });
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <LoadingOutlined />;
   }
-
-  console.log(userData);
 
   return (
     <Card
@@ -125,6 +158,10 @@ export default function TourForm() {
         initialValues={
           {
             ...data,
+            guides: data?.guides.map((guide) => ({
+              label: guide.name,
+              value: guide._id,
+            })),
             startDates: data?.startDates.map((date) =>
               dayjs(date, DATE_FORMAT),
             ),
@@ -249,7 +286,12 @@ export default function TourForm() {
           </Col>
           <Col span={12}>
             <Form.Item name="guides" label="Guides">
-              <Select mode="multiple" className="w-full" options={userData} />
+              <Select
+                mode="multiple"
+                className="w-full"
+                options={userData}
+                allowClear
+              />
             </Form.Item>
           </Col>
           <Col span={12}>
@@ -263,8 +305,8 @@ export default function TourForm() {
                 },
               ]}
             >
-              <Upload {...uploadProps} className="w-full">
-                {imageCover.length >= 1 ? null : (
+              <Upload {...uploadProps}>
+                {imageCover && imageCover.length >= 1 ? null : (
                   <button
                     type="button"
                     style={{ border: 0, background: 'none' }}
@@ -275,9 +317,10 @@ export default function TourForm() {
                 )}
               </Upload>
             </Form.Item>
+            {/* Custom to reused component */}
             <Modal
               open={previewOpen}
-              title="Preview"
+              title={previewTitle}
               footer={null}
               onCancel={() => setPreviewOpen(false)}
             >
@@ -287,7 +330,10 @@ export default function TourForm() {
           <Col span={12}>
             <Form.Item name="images" label="Images">
               <Upload fileList={imageList} listType="picture-card">
-                Upload
+                <button type="button" style={{ border: 0, background: 'none' }}>
+                  <PlusOutlined />
+                  <div style={{ marginTop: 8 }}>Upload</div>
+                </button>
               </Upload>
             </Form.Item>
           </Col>
