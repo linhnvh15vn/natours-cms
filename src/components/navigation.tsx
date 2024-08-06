@@ -6,24 +6,25 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Navigation() {
   const [collapsed, setCollapsed] = useState(false);
+  const location = useLocation();
 
   const items = [
     {
-      key: 'dashboard',
+      key: '/',
       icon: <DashboardOutlined />,
       label: <Link to="/">Dashboard</Link>,
     },
     {
-      key: 'tours',
+      key: '/tours',
       icon: <EnvironmentOutlined />,
       label: <Link to="/tours">Tours</Link>,
     },
     {
-      key: 'users',
+      key: '/users',
       icon: <UserOutlined />,
       label: <Link to="/users">Users</Link>,
     },
@@ -46,7 +47,7 @@ export default function Navigation() {
       <div className="demo-logo-vertical" />
       <Menu
         theme="dark"
-        defaultSelectedKeys={['dashboard']}
+        selectedKeys={[location.pathname]}
         mode="inline"
         items={items}
       />
