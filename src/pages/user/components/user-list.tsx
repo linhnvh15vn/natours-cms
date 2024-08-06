@@ -30,7 +30,6 @@ import {
 } from '@/pages/user/types/user.types';
 import { toCapitalize } from '@/utils';
 
-
 export default function UserList() {
   const [form] = Form.useForm();
   const [selectedUser, setSelectedUser] = useState<User>();
